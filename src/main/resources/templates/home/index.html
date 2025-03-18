@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MinMusicDatabase</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1> Musik Samling </h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Album</th>
+            <th>Genre ID</th>
+            <th>Pladeselskab ID</th>
+        </tr>
+    </thead>
+        <tbody>
+            <tr th:each ="album : ${albums}">
+                <td th:text="${album.name}"></td>
+                <td th:text="${album.genre_id}"></td>
+                <td th:text="${album.company_id}"></td>
+            </tr>
+        </tbody>
+    <a href="/create">
+        <button class="btn-create, btn"> Create new person</button>
+    </a>
+</table>
+</body>
+</html>
