@@ -2,6 +2,7 @@ package com.example.minspringmusikdatabase.Controller;
 
 import com.example.minspringmusikdatabase.Model.Album;
 import com.example.minspringmusikdatabase.Service.AlbumService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 
-    private final AlbumService albumService;
+    @Autowired
+    private final AlbumService albumService; //Dette objekt står til rådighed hele tiden i klassen
 
     public HomeController(AlbumService albumService) {
         this.albumService = albumService;

@@ -2,6 +2,7 @@ package com.example.minspringmusikdatabase.Service;
 
 import com.example.minspringmusikdatabase.Model.Album;
 import com.example.minspringmusikdatabase.Repository.AlbumRepo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class AlbumService {
 
+    @Autowired
     private final AlbumRepo albumRepository; // Instans af AlbumRepo klassen.
 
     public AlbumService(AlbumRepo albumRepository) {
