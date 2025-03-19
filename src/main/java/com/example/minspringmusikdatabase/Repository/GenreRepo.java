@@ -14,11 +14,7 @@ import java.util.List;
 public class GenreRepo {
 
     @Autowired
-    private final JdbcTemplate jdbcTemplate;
-
-    public GenreRepo(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
+    private JdbcTemplate jdbcTemplate;
 
     public List<Genre> fetchAll() {
         String sql = "SELECT * FROM genre"; // Vores query vi bruger til at hente data med.

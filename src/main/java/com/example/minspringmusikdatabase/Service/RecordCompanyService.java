@@ -11,12 +11,7 @@ import java.util.List;
 public class RecordCompanyService {
 
     @Autowired
-    private final RecordCompanyRepo recordCompanyRepo; // Instans af AlbumRepo klassen.
-
-
-    public RecordCompanyService(RecordCompanyRepo recordCompanyRepo) {
-        this.recordCompanyRepo = recordCompanyRepo;
-    }
+    private RecordCompanyRepo recordCompanyRepo; // Instans af AlbumRepo klassen.
 
     public List<RecordCompany> fetchAll() {
         return recordCompanyRepo.fetchAll(); // Forretningslogik

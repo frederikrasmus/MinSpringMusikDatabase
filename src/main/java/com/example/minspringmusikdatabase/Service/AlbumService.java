@@ -7,15 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service //Definerer denne klasse som en service klasse som håndterer forretningslogik
 public class AlbumService {
 
-    @Autowired
-    private final AlbumRepo albumRepository; // Instans af AlbumRepo klassen.
-
-    public AlbumService(AlbumRepo albumRepository) {
-        this.albumRepository = albumRepository;
-    }
+    @Autowired //Spring injicering af Album repository.
+    private AlbumRepo albumRepository;
+    // Instans af AlbumRepo klassen. Så service kan interagere med database klassen
 
     public List<Album> fetchAllWithDetails() {
         return albumRepository.fetchAllWithDetails(); // Forretningslogik

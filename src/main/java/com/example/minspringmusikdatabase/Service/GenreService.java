@@ -13,11 +13,8 @@ import java.util.List;
 public class GenreService {
 
     @Autowired
-    private final GenreRepo genreRepository; // Instans af AlbumRepo klassen.
+    private GenreRepo genreRepository; // Instans af AlbumRepo klassen.
 
-    public GenreService(GenreRepo genreRepository) {
-        this.genreRepository = genreRepository;
-    }
 
     public List<Genre> fetchAll() {
         return genreRepository.fetchAll(); // Forretningslogik

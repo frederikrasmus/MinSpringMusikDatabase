@@ -15,11 +15,8 @@ import java.util.List;
 public class RecordCompanyRepo {
 
     @Autowired
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
-    public RecordCompanyRepo(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     public List<RecordCompany> fetchAll() {
         String sql = "SELECT * FROM recordcompany";
