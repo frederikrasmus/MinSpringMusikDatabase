@@ -19,8 +19,12 @@ public class AlbumRepo {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Album> fetchAll() {
-        String sql = "SELECT * FROM album"; // Vores query vi bruger til at hente data med.
+    public List<Album> fetchAllWithDetails() {
+        String sql = "SELECT a.album_id, a.name, a.genre_id, a.company_id, g.name " +
+                "AS genre_name, r.name AS company_name FROM album a " +
+                "JOIN genre g ON a.genre_id = g.genre_id " +
+                "JOIN recordcompany r ON a.company_id = r.company_id;";
+        // Vores query vi bruger til at hente data med.
         // Vi mapper automatisk kolonner fra databasen til felter i album-klassen.
         RowMapper<Album> rowMapper = new BeanPropertyRowMapper<>(Album.class);
         return jdbcTemplate.query(sql, rowMapper);
@@ -32,7 +36,7 @@ public class AlbumRepo {
     }
 
     public Album findAlbumById(int id) {
-        String sql ="SELECT * FROM album WHERE album_id = ?";
+        String sql ="SELECT a.*, g.name AS genre_name FROM album a JOIN genre g ON a.genre_id = g.genre_id WHERE album_id = ?";
         RowMapper<Album> rowMapper = new BeanPropertyRowMapper<>(Album.class);
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }

@@ -16,17 +16,40 @@
     </div>
 
     <div class="form-group">
-        <label>Enter genre id:</label>
-        <input type="number" name="genre_id" required>
+        <label>Album Genre:</label>
+        <select name="genre_id">
+            <option th:each="genre : ${genres}"
+                    th:value="${genre.genre_id}"
+                    th:text="${genre.name}">
+            </option>
+        </select>
+            <a href="/createGenre">
+                <button type="button">New Genre</button>
+            </a>
     </div>
 
     <div class="form-group">
-        <label>Enter company id:</label>
-        <input type="number" name="company_id" required>
+        <label>Album Record Company:</label>
+        <select name="company_id">
+            <option th:each="company : ${companies}"
+                    th:value="${company.company_id}"
+                    th:text="${company.name}">
+            </option>
+        </select>
+        <a href="/createCompany">
+            <button type="button">New Company</button>
+        </a>
     </div>
 
-    <button type="submit" class="btn">Create Album</button>
+    <input type="submit" value="Create Album">
+
 </form>
+<a href="/">
+    <button>Cancel</button>
+</a>
+
+
+
 
 
 </body>

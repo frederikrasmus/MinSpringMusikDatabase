@@ -17,8 +17,8 @@ public class AlbumService {
         this.albumRepository = albumRepository;
     }
 
-    public List<Album> fetchAll() {
-        return albumRepository.fetchAll(); // Forretningslogik
+    public List<Album> fetchAllWithDetails() {
+        return albumRepository.fetchAllWithDetails(); // Forretningslogik
     }
 
     public void addAlbum(Album album) {
