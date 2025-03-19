@@ -6,21 +6,35 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<h1> Musik Samling </h1>
+<h1> Musik Collection </h1>
 
 <table>
     <thead>
         <tr>
+            <th>Id</th>
             <th>Album</th>
             <th>Genre ID</th>
-            <th>Pladeselskab ID</th>
+            <th>Record Company ID</th>
+            <th>Options</th>
         </tr>
     </thead>
         <tbody>
             <tr th:each ="album : ${albums}">
+                <td th:text="${album.album_id}"></td>
                 <td th:text="${album.name}"></td>
                 <td th:text="${album.genre_id}"></td>
                 <td th:text="${album.company_id}"></td>
+                <td>
+                    <a th:href="@{'/viewOne/'+${album.album_id}}">
+                        <button class="btn-viewOne" id="btn-viewOne">View an Album</button>
+                    </a>
+                    <a th:href="@{'/deleteOne/'+${album.album_id}}">
+                    <button class="btn-deleteOne" id="btn-deleteOne">Delete Album</button>
+                    </a>
+                    <a th:href="@{'/updateOne/'+${album.album_id}}">
+                        <button class="btn-updateOne" id="btn-updateOne">Update Album</button>
+                    </a>
+                </td>
             </tr>
         </tbody>
 

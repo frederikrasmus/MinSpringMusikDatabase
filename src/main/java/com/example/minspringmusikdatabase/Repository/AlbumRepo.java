@@ -31,16 +31,20 @@ public class AlbumRepo {
         jdbcTemplate.update(sql, a.getName(), a.getGenre_id(), a.getCompany_id());
     }
 
-    public Album findAlbum(int id) {
-        return null;
+    public Album findAlbumById(int id) {
+        String sql ="SELECT * FROM album WHERE album_id = ?";
+        RowMapper<Album> rowMapper = new BeanPropertyRowMapper<>(Album.class);
+        return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
     public boolean deleteAlbum(int id) {
-        return false;
+        String sql = "DELETE FROM album WHERE album_id =?";
+        return jdbcTemplate.update(sql, id) > 0;
     }
 
     public void updateAlbum(Album a) {
-
+        String sql = "UPDATE album SET name = ?, genre_id = ?, company_id = ? WHERE album_id = ?";
+        jdbcTemplate.update(sql, a.getName(), a.getGenre_id(), a.getCompany_id(), a.getAlbum_id());
     }
 
 }

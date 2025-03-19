@@ -1,6 +1,6 @@
 table {
     border-collapse: collapse;
-    width: 50%;
+    width: 70%;
 }
 
 th {
@@ -29,7 +29,7 @@ tr:nth-child(even) {
 }
 
 label {
-    width: 135px;
+    width: 160px;
     text-align: left;
     font-weight: bold;
 }
@@ -43,4 +43,16 @@ label {
 .btn:hover {
     box-shadow: 2px 2px 6px black;
     background-color: darkgreen;
+}
+
+.btn-viewOne {
+    background-color: brown;
+}
+
+.btn-deleteOne {
+    background-color: aqua;
+}
+
+.btn-updateOne {
+    background-color: darkviolet;
 }

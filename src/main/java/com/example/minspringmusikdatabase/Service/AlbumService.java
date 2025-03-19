@@ -24,4 +24,16 @@ public class AlbumService {
     public void addAlbum(Album album) {
         albumRepository.addAlbum(album); // Forretningslogik
     }
+
+    public Album findAlbumById(int id) {
+        return albumRepository.findAlbumById(id);
+    }
+
+    public boolean deleteAlbum(int id) {
+        return albumRepository.deleteAlbum(id);
+    }
+
+    public void updateAlbum(Album a) {
+        albumRepository.updateAlbum(a);
+    }
 }

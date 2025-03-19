@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -34,6 +35,30 @@ public class HomeController {
     @PostMapping("/create")
     public String createAlbum(@ModelAttribute Album album) {
         albumService.addAlbum(album);
+        return "redirect:/";
+    }
+
+    @GetMapping("/viewOne/{id}")
+    public String viewOne(@PathVariable("id") int id, Model model) {
+        model.addAttribute("album", albumService.findAlbumById(id));
+        return "home/viewOne";
+    }
+
+    @GetMapping("/deleteOne/{id}")
+    public String deleteOne(@PathVariable("id") int id) {
+        albumService.deleteAlbum(id);
+        return "redirect:/";
+    }
+
+    @GetMapping("/updateOne/{id}")
+    public String updateOne(@PathVariable("id") int id, Model model) {
+        model.addAttribute("album", albumService.findAlbumById(id));
+        return "home/updateOne";
+    }
+
+    @PostMapping("/updateOne")
+    public String updateAlbum(@ModelAttribute Album album) {
+        albumService.updateAlbum(album);
         return "redirect:/";
     }
 }
