@@ -1,7 +1,10 @@
 package com.example.minspringmusikdatabase.Repository;
 
 import com.example.minspringmusikdatabase.Model.Album;
+import com.example.minspringmusikdatabase.Model.Artist;
+import com.example.minspringmusikdatabase.Model.Tracks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,11 +23,21 @@ public class AlbumRepo {
         String sql = "SELECT a.album_id, a.name, a.genre_id, a.company_id, g.name " +
                 "AS genre_name, r.name AS company_name FROM album a " +
                 "JOIN genre g ON a.genre_id = g.genre_id " +
-                "JOIN recordcompany r ON a.company_id = r.company_id;";
+                "JOIN recordcompany r ON a.company_id = r.company_id " +
+                "ORDER BY a.album_id ASC;";
         // Vores query vi bruger til at hente data med.
         // Vi mapper automatisk kolonner fra databasen til felter i album-klassen.
         RowMapper<Album> rowMapper = new BeanPropertyRowMapper<>(Album.class);
-        return jdbcTemplate.query(sql, rowMapper);
+        //Vi smider data ind i en liste som vi så kan køre gennem et loop
+        List<Album> albums = jdbcTemplate.query(sql, rowMapper);
+
+        // For-each loop som tildeler et album en artist ud fra album_id.
+        for(Album album : albums) {
+            Artist artists = fetchArtistByAlbumID(album.getAlbum_id());
+            album.setArtists(artists);
+        }
+        // Returnerer listen albums med artist indkluderet.
+        return albums;
     }
 
     // Tilføjer et nyt album i databasen
@@ -58,4 +71,20 @@ public class AlbumRepo {
         jdbcTemplate.update(sql, a.getName(), a.getGenre_id(), a.getCompany_id(), a.getAlbum_id());
     }
 
+    public List<Tracks> fetchTracksByAlbumId(int albumId) {
+        String sql = "SELECT * FROM tracks WHERE album_id = ?";
+        RowMapper<Tracks> rowMapper = new BeanPropertyRowMapper<>(Tracks.class);
+        return jdbcTemplate.query(sql, rowMapper, albumId);
+    }
+
+    public Artist fetchArtistByAlbumID(int albumId) {
+        String sql = "SELECT a.* FROM artist a JOIN artist_album aa " +
+                "ON a.artist_id = aa.artist_id WHERE aa.album_id = ? LIMIT 1";
+        RowMapper<Artist> rowMapper = new BeanPropertyRowMapper<>(Artist.class);
+        try {
+            return jdbcTemplate.queryForObject(sql, rowMapper, albumId);
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

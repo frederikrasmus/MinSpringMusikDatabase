@@ -57,6 +57,9 @@ public class HomeController {
     @GetMapping("/viewOne/{id}")
     public String viewOne(@PathVariable("id") int id, Model model) {
         model.addAttribute("album", albumService.findAlbumById(id));
+        model.addAttribute("tracks", albumService.fetchTracksByAlbumId(id));
+        model.addAttribute("artists", albumService.fetchArtistByAlbumID(id));
+        model.addAttribute("albums", albumService.fetchAllWithDetails());
         return "home/viewOne";
     }
 

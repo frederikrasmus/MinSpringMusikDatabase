@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<h1> Musik Collection </h1>
+<h1> Music Collection </h1>
 
 <table>
     <thead>
         <tr>
             <th>Id</th>
+            <th>Artist</th>
             <th>Album</th>
             <th>Genre</th>
             <th>Record Company</th>
@@ -21,6 +22,7 @@
         <tbody>
             <tr th:each ="album : ${albums}">
                 <td th:text="${album.album_id}"></td>
+                <td th:text="${album.artists != null} ? ${album.artists} : 'No Artist'"></td>
                 <td th:text="${album.name}"></td>
                 <td th:text="${album.genre_name}"></td>
                 <td th:text="${album.company_name}"></td>
@@ -39,8 +41,15 @@
         </tbody>
 
     <a href="/create">
-        <button class="btn-create, btn"> Create new Album</button>
+        <button class="btn"> Create new Album</button>
     </a>
+    <a href="/createGenre">
+        <button class="btn button2"> Create new Genre</button>
+    </a>
+    <a href="/createCompany">
+        <button class="btn button3"> Create new Record Company</button>
+    </a>
+
 
 </table>
 </body>

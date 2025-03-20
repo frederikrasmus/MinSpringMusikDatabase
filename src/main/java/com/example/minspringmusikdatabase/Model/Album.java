@@ -1,5 +1,7 @@
 package com.example.minspringmusikdatabase.Model;
 
+import java.util.List;
+
 public class Album {
 
     private int album_id;
@@ -8,6 +10,7 @@ public class Album {
     private int company_id;
     private String genre_name;
     private String company_name;
+    private Artist artists;
 
     public Album() {
     }
@@ -26,6 +29,17 @@ public class Album {
         this.company_id = company_id;
         this.genre_name = genre_name;
         this.company_name = company_name;
+    }
+
+    public Album(int album_id, String name, int genre_id, int company_id, String genre_name,
+                 String company_name, Artist artists) {
+        this.album_id = album_id;
+        this.name = name;
+        this.genre_id = genre_id;
+        this.company_id = company_id;
+        this.genre_name = genre_name;
+        this.company_name = company_name;
+        this.artists = artists;
     }
 
     public int getAlbum_id() {
@@ -74,5 +88,13 @@ public class Album {
 
     public void setCompany_name(String company_name) {
         this.company_name = company_name;
+    }
+
+    public Artist getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Artist artists) {
+        this.artists = artists;
     }
 }

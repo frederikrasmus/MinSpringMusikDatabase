@@ -3,6 +3,12 @@ table {
     width: 70%;
 }
 
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
 th {
     background-color: grey;
     text-align: left;
@@ -28,6 +34,9 @@ tr:nth-child(even) {
     transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
+.btn.button2 {background-color: crimson;}
+.btn.button3 {background-color: darkorange;}
+
 label {
     width: 195px;
     text-align: left;
@@ -44,6 +53,12 @@ label {
     box-shadow: 2px 2px 6px black;
     background-color: darkgreen;
 }
+
+.btn:hover.button2 {
+    background-color: darkred;
+}
+.btn:hover.button3 {background-color: darkgoldenrod
+;}
 
 .btn-viewOne {
     background-color: brown;

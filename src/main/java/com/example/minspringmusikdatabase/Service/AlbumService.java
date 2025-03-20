@@ -1,8 +1,12 @@
 package com.example.minspringmusikdatabase.Service;
 
 import com.example.minspringmusikdatabase.Model.Album;
+import com.example.minspringmusikdatabase.Model.Artist;
+import com.example.minspringmusikdatabase.Model.Tracks;
 import com.example.minspringmusikdatabase.Repository.AlbumRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,5 +36,13 @@ public class AlbumService {
 
     public void updateAlbum(Album a) {
         albumRepository.updateAlbum(a);
+    }
+
+    public List<Tracks> fetchTracksByAlbumId(int albumId) {
+        return albumRepository.fetchTracksByAlbumId(albumId);
+    }
+
+    public Artist fetchArtistByAlbumID(int albumId) {
+        return albumRepository.fetchArtistByAlbumID(albumId);
     }
 }

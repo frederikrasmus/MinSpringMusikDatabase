@@ -3,15 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>View Album</title>
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <h1>View Album</h1>
 
     <p>ID: <span th:text="${album.album_id}"></span></p>
     <p>Album Name: <span th:text="${album.name}"></span></p>
-    <p>Genre ID: <span th:text="${album.genre_id}"></span></p>
     <p>Genre Name: <span th:text="${album.genre_name}"></span></p>
+    <p>Genre ID: <span th:text="${album.genre_id}"></span></p>
     <p>Record Company ID: <span th:text="${album.company_id}"></span></p>
+
+
+    <h2>Artists</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Artist Name</th>
+            <th>Country</th>
+            <th>Gender</th>
+            <th>Age</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="artist : ${artists}">
+            <td th:text="${artist.name}"></td>
+            <td th:text="${artist.country}"></td>
+            <td th:text="${artist.gender}"></td>
+            <td th:text="${artist.age}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Tracks</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Track title</th>
+                <th>Duration</th>
+            </tr>
+        </thead>
+            <tbody>
+            <tr th:each="track : ${tracks}">
+                <td th:text="${track.title}"></td>
+                <td th:text="${track.duration}"></td>
+            </tr>
+        </tbody>
+    </table>
 
     <a href="/">
         <button>Back to List</button>
