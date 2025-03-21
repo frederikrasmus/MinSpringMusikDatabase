@@ -1,16 +1,18 @@
 package com.example.minspringmusikdatabase.Model;
 
+import java.time.LocalTime;
+
 public class Tracks {
 
     private int Track_id;
     private int album_id;
     private String title;
-    private String duration;
+    private LocalTime duration;
 
     public Tracks() {
     }
 
-    public Tracks(int track_id, int album_id, String title, String duration) {
+    public Tracks(int track_id, int album_id, String title, LocalTime duration) {
         Track_id = track_id;
         this.album_id = album_id;
         this.title = title;
@@ -41,11 +43,11 @@ public class Tracks {
         this.title = title;
     }
 
-    public String getDuration() {
+    public LocalTime getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(LocalTime duration) {
         this.duration = duration;
     }
 }

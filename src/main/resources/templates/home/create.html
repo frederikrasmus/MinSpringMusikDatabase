@@ -2,15 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Create Album</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<h1>Create New Album</h1>
+<h1>Create New Album</h1> <!--Overskrift på siden -->
 
-<form action="/create" method="post">
+<!--Formular til oprettelse af nyt album -->
+<form action="/create" method="post"> <!-- formularen sender en post anmodning til /create url -->
 
-    <div class="form-group">
+    <div class="form-group"> 
         <label>Enter album name:</label>
         <input type="text" name="name" required>
     </div>

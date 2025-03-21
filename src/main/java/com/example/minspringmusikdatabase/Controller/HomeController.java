@@ -1,11 +1,12 @@
 package com.example.minspringmusikdatabase.Controller;
-
 import com.example.minspringmusikdatabase.Model.Album;
 import com.example.minspringmusikdatabase.Model.Genre;
 import com.example.minspringmusikdatabase.Model.RecordCompany;
+import com.example.minspringmusikdatabase.Model.Tracks;
 import com.example.minspringmusikdatabase.Service.AlbumService;
 import com.example.minspringmusikdatabase.Service.GenreService;
 import com.example.minspringmusikdatabase.Service.RecordCompanyService;
+import com.example.minspringmusikdatabase.Service.TrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
+import javax.sound.midi.Track;
+
 
 @Controller
 public class HomeController {
@@ -26,8 +28,8 @@ public class HomeController {
     private GenreService genreService;
     @Autowired
     private RecordCompanyService recordCompanyService;
-
-
+    @Autowired
+    private TrackService trackService;
 
     // Viser startsiden med liste af albums
     @GetMapping("/")
@@ -59,7 +61,6 @@ public class HomeController {
         model.addAttribute("album", albumService.findAlbumById(id));
         model.addAttribute("tracks", albumService.fetchTracksByAlbumId(id));
         model.addAttribute("artists", albumService.fetchArtistByAlbumID(id));
-        model.addAttribute("albums", albumService.fetchAllWithDetails());
         return "home/viewOne";
     }
 
@@ -112,5 +113,18 @@ public class HomeController {
     public String saveCompany(@ModelAttribute RecordCompany company) {
         recordCompanyService.addRecordCompany(company);
         return "redirect:/";
+    }
+
+    @GetMapping("/addTrack")
+    public String addTrack(Model model) {
+        model.addAttribute("track", new Tracks());
+        model.addAttribute("albums", albumService.fetchAllWithDetails());
+        return"home/addTrack";
+    }
+
+    @PostMapping("/addTrack")
+    public String addTrack(@ModelAttribute Tracks tracks) {
+        trackService.addTracks(tracks);
+        return"redirect:/";
     }
 }

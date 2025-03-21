@@ -1,7 +1,5 @@
 package com.example.minspringmusikdatabase.Model;
 
-import java.util.List;
-
 public class Album {
 
     private int album_id;

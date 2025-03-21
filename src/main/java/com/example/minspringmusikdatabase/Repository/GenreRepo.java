@@ -23,22 +23,26 @@ public class GenreRepo {
         return jdbcTemplate.query(sql, rowMapper);
     }
 
+    // Tilføjer genre i databasen
     public void addGenre(Genre g) {
         String sql = "INSERT INTO genre (name) VALUES (?)"; // PreparedStatement
         jdbcTemplate.update(sql, g.getName());
     }
 
+    // Finder genre baseret på genre id
     public Genre findGenreById(int id) {
         String sql ="SELECT * FROM genre WHERE genre_id = ?";
         RowMapper<Genre> rowMapper = new BeanPropertyRowMapper<>(Genre.class);
         return jdbcTemplate.queryForObject(sql, rowMapper, id);
     }
 
+    // Slette genre baseret på genre id
     public boolean deleteGenre(int id) {
         String sql = "DELETE FROM genre WHERE genre_id =?";
         return jdbcTemplate.update(sql, id) > 0;
     }
 
+    // Opdaterer genre baseret på genre id
     public void updateGenre(Genre g) {
         String sql = "UPDATE genre SET name = ? WHERE genre_id = ?";
         jdbcTemplate.update(sql, g.getName(), g.getGenre_id());

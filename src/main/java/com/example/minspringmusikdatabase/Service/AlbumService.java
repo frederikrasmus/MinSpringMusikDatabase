@@ -5,8 +5,6 @@ import com.example.minspringmusikdatabase.Model.Artist;
 import com.example.minspringmusikdatabase.Model.Tracks;
 import com.example.minspringmusikdatabase.Repository.AlbumRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +28,8 @@ public class AlbumService {
         return albumRepository.findAlbumById(id);
     }
 
-    public boolean deleteAlbum(int id) {
-        return albumRepository.deleteAlbum(id);
+    public void deleteAlbum(int id) {
+        albumRepository.deleteAlbum(id);
     }
 
     public void updateAlbum(Album a) {

@@ -26,16 +26,17 @@ tr:nth-child(even) {
 }
 
 .btn {
-    background-color: green;
+    background-color: lightblue;
+    border-radius: 5px;
     border: none;
     color: white;
     padding: 7px 10px;
+    margin: 5px;
     text-align: center;
     transition: box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
 }
 
-.btn.button2 {background-color: crimson;}
-.btn.button3 {background-color: darkorange;}
+
 
 label {
     width: 195px;
@@ -51,21 +52,16 @@ label {
 
 .btn:hover {
     box-shadow: 2px 2px 6px black;
-    background-color: darkgreen;
+    background-color: cadetblue;
 }
 
-.btn:hover.button2 {
-    background-color: darkred;
-}
-.btn:hover.button3 {background-color: darkgoldenrod
-;}
 
 .btn-viewOne {
-    background-color: brown;
+    background-color: aqua;
 }
 
 .btn-deleteOne {
-    background-color: aqua;
+    background-color: brown;
 }
 
 .btn-updateOne {

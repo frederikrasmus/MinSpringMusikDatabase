@@ -1,5 +1,4 @@
 package com.example.minspringmusikdatabase.Repository;
-
 import com.example.minspringmusikdatabase.Model.Album;
 import com.example.minspringmusikdatabase.Model.Artist;
 import com.example.minspringmusikdatabase.Model.Tracks;
@@ -71,18 +70,21 @@ public class AlbumRepo {
         jdbcTemplate.update(sql, a.getName(), a.getGenre_id(), a.getCompany_id(), a.getAlbum_id());
     }
 
+    // Finder sange baseret på album id
     public List<Tracks> fetchTracksByAlbumId(int albumId) {
         String sql = "SELECT * FROM tracks WHERE album_id = ?";
         RowMapper<Tracks> rowMapper = new BeanPropertyRowMapper<>(Tracks.class);
         return jdbcTemplate.query(sql, rowMapper, albumId);
     }
 
+    // Finder kunstnere baseret på album id
     public Artist fetchArtistByAlbumID(int albumId) {
         String sql = "SELECT a.* FROM artist a JOIN artist_album aa " +
                 "ON a.artist_id = aa.artist_id WHERE aa.album_id = ? LIMIT 1";
         RowMapper<Artist> rowMapper = new BeanPropertyRowMapper<>(Artist.class);
         try {
             return jdbcTemplate.queryForObject(sql, rowMapper, albumId);
+            // Oprettede en catch, hvis der nu ikke er tildelt en kunstner til et album
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
