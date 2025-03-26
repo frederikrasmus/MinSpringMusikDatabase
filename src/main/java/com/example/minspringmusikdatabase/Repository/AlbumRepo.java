@@ -40,10 +40,14 @@ public class AlbumRepo {
     }
 
     // Tilføjer et nyt album i databasen
-    public void addAlbum(Album a) {
+    public int addAlbum(Album a) {
         String sql = "INSERT INTO album (name, genre_id, company_id) VALUES (?, ?, ?)"; // PreparedStatement
         // Bruger jdbcTemplate til at indsætte data i databasen.
         jdbcTemplate.update(sql, a.getName(), a.getGenre_id(), a.getCompany_id());
+
+        // Modtag genereret album_id
+        String idSql = "SELECT LAST_INSERT_ID()";
+        return jdbcTemplate.queryForObject(idSql, Integer.class);
     }
 
     // Finder et album baseret på id.
@@ -57,6 +61,10 @@ public class AlbumRepo {
 
     // Sletter et album baseret på id
     public boolean deleteAlbum(int id) {
+        // Først sletter vi reference til artist_album
+        String deleteArtistAlbumSql = "DELETE FROM artist_album WHERE album_id = ?";
+        jdbcTemplate.update(deleteArtistAlbumSql, id);
+
         String sql = "DELETE FROM album WHERE album_id =?";
         //Hvis update returnerer et tal større end 0, er sletningen lykkedes
         // Dette tal den returnerer, er en repræsentation af antallet af rækker der er blevet sletter.
@@ -88,5 +96,10 @@ public class AlbumRepo {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    public void addArtistToAlbum(int artistId, int albumId) {
+        String sql = "INSERT INTO artist_album (artist_id, album_id) VALUES (?, ?)";
+        jdbcTemplate.update(sql, artistId, albumId);
     }
 }

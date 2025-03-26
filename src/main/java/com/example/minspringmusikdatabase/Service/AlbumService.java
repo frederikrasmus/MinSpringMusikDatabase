@@ -20,8 +20,8 @@ public class AlbumService {
         return albumRepository.fetchAllWithDetails(); // Forretningslogik
     }
 
-    public void addAlbum(Album album) {
-        albumRepository.addAlbum(album); // Forretningslogik
+    public int addAlbum(Album album) {
+        return albumRepository.addAlbum(album); // Forretningslogik
     }
 
     public Album findAlbumById(int id) {
@@ -42,5 +42,9 @@ public class AlbumService {
 
     public Artist fetchArtistByAlbumID(int albumId) {
         return albumRepository.fetchArtistByAlbumID(albumId);
+    }
+
+    public void addArtistToAlbum(int artistId, int albumId) {
+        albumRepository.addArtistToAlbum(artistId, albumId);
     }
 }

@@ -1,19 +1,10 @@
 package com.example.minspringmusikdatabase.Controller;
-import com.example.minspringmusikdatabase.Model.Album;
-import com.example.minspringmusikdatabase.Model.Genre;
-import com.example.minspringmusikdatabase.Model.RecordCompany;
-import com.example.minspringmusikdatabase.Model.Tracks;
-import com.example.minspringmusikdatabase.Service.AlbumService;
-import com.example.minspringmusikdatabase.Service.GenreService;
-import com.example.minspringmusikdatabase.Service.RecordCompanyService;
-import com.example.minspringmusikdatabase.Service.TrackService;
+import com.example.minspringmusikdatabase.Model.*;
+import com.example.minspringmusikdatabase.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.sound.midi.Track;
 
@@ -30,6 +21,12 @@ public class HomeController {
     private RecordCompanyService recordCompanyService;
     @Autowired
     private TrackService trackService;
+    @Autowired
+    private ArtistService artistService;
+    @Autowired
+    private CountryService countryService;
+    @Autowired
+    private GenderService genderService;
 
     // Viser startsiden med liste af albums
     @GetMapping("/")
@@ -44,14 +41,20 @@ public class HomeController {
         model.addAttribute("album", new Album()); // Tilføjer et tomt objekt til min Controller
         model.addAttribute("genres", genreService.fetchAll());// Tilføjer genres til model
         model.addAttribute("companies", recordCompanyService.fetchAll());
+        model.addAttribute("artists", artistService.fetchAll());
         //Genre og companies tilføjes i en liste hver for sig.
         return "home/create";
     }
 
     //Gemmer/Opretter et nyt album
     @PostMapping("/create")
-    public String createAlbum(@ModelAttribute Album album) {
-        albumService.addAlbum(album);
+    public String createAlbum(@ModelAttribute Album album,@RequestParam(required = false) Integer artistId) {
+        int albumId = albumService.addAlbum(album);
+
+        //Hvis en eksisterende artist er valgt
+        if(artistId != null) {
+            albumService.addArtistToAlbum(artistId, albumId);
+        }
         return "redirect:/";
     }
 
@@ -125,6 +128,20 @@ public class HomeController {
     @PostMapping("/addTrack")
     public String addTrack(@ModelAttribute Tracks tracks) {
         trackService.addTracks(tracks);
+        return"redirect:/";
+    }
+
+    @GetMapping("/addArtist")
+    public String addArtist(Model model) {
+        model.addAttribute("artist", new Artist());
+        model.addAttribute("countries", countryService.fetchAll());
+        model.addAttribute("genders", genderService.fetchAll());
+        return"home/addArtist";
+    }
+
+    @PostMapping("/addArtist")
+    public String addArtist(@ModelAttribute Artist artist) {
+        artistService.addArtist(artist);
         return"redirect:/";
     }
 }

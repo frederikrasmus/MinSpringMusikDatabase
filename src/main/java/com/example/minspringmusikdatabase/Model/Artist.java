@@ -8,6 +8,7 @@ public class Artist {
     private String gender;
     private int age;
 
+
     public Artist() {
     }
 

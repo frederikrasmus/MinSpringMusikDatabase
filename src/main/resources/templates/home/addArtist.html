@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<h1>Create an Artist</h1>
+
+<form action="/addArtist" method="post">
+    <div class="form-group">
+        <label>Type Name:</label>
+        <input type="text" name="name" th:value="${artist.name}">
+    </div>
+
+    <div class="form-group">
+        <label>Choose a Country:</label>
+        <select name="country">
+            <option th:each="country : ${countries}"
+                    th:value="${country.name}"
+                    th:text="${country.name}"
+                    th:selected="${country.country_id}">
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Choose a Gender:</label>
+        <select name="gender">
+            <option th:each="gender : ${genders}"
+                    th:value="${gender.name}"
+                    th:text="${gender.name}"
+                    th:selected="${gender.gender_id}">
+            </option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Type Age:</label>
+        <input type="number" name="age" th:value="${artist.age}">
+    </div>
+
+    <div class="button-group">
+        <input type="submit" value="Add Artist">
+        <a href="/">
+            <button type="button">Cancel</button>
+        </a>
+    </div>
+</form>
+</body>
+</html>
